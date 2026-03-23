@@ -2,11 +2,32 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\CountryController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
-// Route::get('/', function () {
-//     return view('admin.dashboard');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 
 Route::get('/admin/dashboard', [DashboardController::class, 'index']);
-Route::get('/admin/profile', [UserController::class, 'index']);
+
+Route::get('/admin/profile', [ProfileController::class, 'index']);
+Route::post('/admin/profile', [ProfileController::class, 'update']);
+
+//country
+Route::get('/admin/country', [CountryController::class, 'index']);
+
+Route::get('/admin/country/add', [CountryController::class, 'add']);
+Route::post('/admin/country/add', [CountryController::class, 'insert']);
+
+Route::get('/admin/country/edit/{id}', [CountryController::class, 'edit']);
+Route::post('/admin/country/edit/{id}', [CountryController::class, 'update']);
+
+Route::get('/admin/country/delete/{id}', [CountryController::class, 'delete']);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
