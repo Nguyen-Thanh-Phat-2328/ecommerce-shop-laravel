@@ -27,13 +27,16 @@
 <body>
 	@include('frontend.layouts.header')
 	
-	@include('frontend.layouts.slide')
-	
+    @if (!request()->is('frontend/register')) 
+        @include('frontend.layouts.slide')
+    @endif
 	<section>
 		<div class="container">
 			<div class="row">
 				
-                @include('frontend.layouts.menu-left')
+                @if (!request()->is('frontend/register'))
+                    @include('frontend.layouts.menu-left')
+                @endif
 
                 <div class="col-sm-9 padding-right">
                     @yield('content')

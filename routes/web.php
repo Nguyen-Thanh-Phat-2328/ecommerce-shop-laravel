@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\MemberController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -48,3 +49,7 @@ Route::get('/home', [App\Http\Controllers\Admin\HomeController::class, 'index'])
 
 //Frontend
 Route::get('/frontend/home', [HomeController::class, 'index']);
+
+//register, login
+Route::get('/frontend/register', [MemberController::class, 'add']);
+Route::post('/frontend/register', [MemberController::class, 'register']);
