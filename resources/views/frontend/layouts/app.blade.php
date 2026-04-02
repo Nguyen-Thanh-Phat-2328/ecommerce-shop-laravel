@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Home | E-Shopper</title>
     <link href="{{ asset('frontend/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('frontend/css/font-awesome.min.css') }}" rel="stylesheet">
@@ -13,6 +14,7 @@
     <link href="{{ asset('frontend/css/animate.css') }}" rel="stylesheet">
 	<link href="{{ asset('frontend/css/main.css') }}" rel="stylesheet">
 	<link href="{{ asset('frontend/css/responsive.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('frontend/css/rate.css') }}">
     <!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
@@ -27,14 +29,15 @@
 <body>
 	@include('frontend.layouts.header')
 	
-    @if (!request()->is('frontend/register')) 
+    @if (!request()->is('frontend/register') && !request()->is('frontend/login') && !request()->is('frontend/blog') && !request()->is('frontend/blog/detail/*')) 
         @include('frontend.layouts.slide')
     @endif
+
 	<section>
 		<div class="container">
 			<div class="row">
 				
-                @if (!request()->is('frontend/register'))
+                @if (!request()->is('frontend/register') && !request()->is('frontend/login'))
                     @include('frontend.layouts.menu-left')
                 @endif
 
@@ -47,8 +50,6 @@
 	</section>
 	
 	@include('frontend.layouts.footer')
-	
-
   
     <script src="{{ asset('frontend/js/jquery.js') }}"></script>
 	<script src="{{ asset('frontend/js/bootstrap.min.js') }}"></script>
@@ -56,5 +57,17 @@
 	<script src="{{ asset('frontend/js/price-range.js') }}"></script>
     <script src="{{ asset('frontend/js/jquery.prettyPhoto.js') }}"></script>
     <script src="{{ asset('frontend/js/main.js') }}"></script>
+    {{-- <script src="{{ asset('frontend/js/jquery-1.9.1.min.js') }}"></script> --}}
+
+    @yield('script')
+    <script>
+        $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            })
+        })
+    </script>
 </body>
 </html>

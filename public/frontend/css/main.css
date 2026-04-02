@@ -2090,6 +2090,12 @@ textarea {
     font-size: 12px
 }
 
+.rating-area .ratings .li {
+    float: left;
+    padding: 5px;
+    font-size: 12px
+}
+
 .rating-area .ratings {
     float: left;
     padding-left: 0;
@@ -2097,6 +2103,10 @@ textarea {
 }
 
 .rating-area .ratings li i {
+    color: #CCCCCC
+}
+
+.rating-area .ratings .li i {
     color: #CCCCCC
 }
 

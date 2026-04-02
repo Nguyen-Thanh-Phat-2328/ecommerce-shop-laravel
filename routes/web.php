@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Frontend\BlogController as FrontendBlogController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\MemberController;
 use Illuminate\Support\Facades\Route;
@@ -51,5 +52,16 @@ Route::get('/home', [App\Http\Controllers\Admin\HomeController::class, 'index'])
 Route::get('/frontend/home', [HomeController::class, 'index']);
 
 //register, login
-Route::get('/frontend/register', [MemberController::class, 'add']);
+Route::get('/frontend/register', [MemberController::class, 'registerView']);
 Route::post('/frontend/register', [MemberController::class, 'register']);
+
+Route::get('/frontend/login', [MemberController::class, 'loginView']);
+Route::post('/frontend/login', [MemberController::class, 'login']);
+
+//blog
+Route::get('/frontend/blog', [FrontendBlogController::class, 'index']);
+
+Route::get('/frontend/blog/detail/{id}', [FrontendBlogController::class, 'blogDetail']);
+
+//blog rate ajax
+Route::post('/frontend/blog/rate/ajax', [FrontendBlogController::class, 'blogRateAjax']);

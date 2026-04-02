@@ -58,7 +58,7 @@
 							<div class="video-gallery text-center">
 								<a href="#">
 									<div class="iframe-img">
-										<img src="{{ asset('frontend/images/home/iframe4.png') }}
+										<img src="{{ asset('frontend/images/home/iframe4.png') }}" alt="" />
 									<div class="overlay-icon">
 										<i class="fa fa-play-circle-o"></i>
 									</div>
