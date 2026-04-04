@@ -60,7 +60,7 @@
 						<div class="shop-menu clearfix pull-right">
 							<ul class="nav navbar-nav">
 								@if (Auth::Check())
-									<li><a href=""><i class="fa fa-user"></i> Account</a></li>
+									<li><a href="{{ url('frontend/account/update') }}"><i class="fa fa-user"></i> Account</a></li>
 								@endif
 								<li><a href=""><i class="fa fa-star"></i> Wishlist</a></li>
 								<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>

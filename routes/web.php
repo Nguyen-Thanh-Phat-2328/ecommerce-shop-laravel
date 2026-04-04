@@ -69,3 +69,7 @@ Route::get('/frontend/blog/detail/{id}', [FrontendBlogController::class, 'blogDe
 Route::post('/frontend/blog/rate/ajax', [FrontendBlogController::class, 'blogRateAjax']);
 //blog comment ajax
 Route::post('/frontend/blog/comment/ajax', [FrontendBlogController::class, 'blogCommentAjax']);
+
+//account
+Route::get('/frontend/account/update', [MemberController::class, 'profileView']);
+Route::post('/frontend/account/update', [MemberController::class, 'profileUpdate']);
