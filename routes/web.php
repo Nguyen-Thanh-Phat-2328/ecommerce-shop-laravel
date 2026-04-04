@@ -65,3 +65,5 @@ Route::get('/frontend/blog/detail/{id}', [FrontendBlogController::class, 'blogDe
 
 //blog rate ajax
 Route::post('/frontend/blog/rate/ajax', [FrontendBlogController::class, 'blogRateAjax']);
+//blog comment ajax
+Route::post('/frontend/blog/comment/ajax', [FrontendBlogController::class, 'blogCommentAjax']);

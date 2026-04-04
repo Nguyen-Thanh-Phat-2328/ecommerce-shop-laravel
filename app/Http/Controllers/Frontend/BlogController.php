@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
+use App\Models\Comment;
 use App\Models\Rate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,17 +19,21 @@ class BlogController extends Controller
 
     public function blogDetail($id)
     {
+        //phân trang trong blog single
         $blogCurrent = Blog::find($id);
 
         $blogPrev = Blog::where('created_at', '<', $blogCurrent->created_at)->orderBy('created_at', 'desc')->first();
 
         $blogNext = Blog::where('created_at', '>', $blogCurrent->created_at)->orderBy('created_at', 'asc')->first();
 
+        //đánh giá
         $rate = Rate::where('id_blog', $id)->avg('rate');
         $rateRound = round($rate);
         $rateCount = Rate::where('id_blog', $id)->count('rate');
         
-        return view('frontend/blog/blog-detail', compact('blogCurrent', 'blogPrev', 'blogNext', 'rateRound', 'rateCount'));
+        //comment
+        $comments = Comment::Where('id_blog', $id)->orderBy('created_at', 'desc')->get();
+        return view('frontend/blog/blog-detail', compact('blogCurrent', 'blogPrev', 'blogNext', 'rateRound', 'rateCount', 'comments'));
     }
 
     public function blogRateAjax(Request $request) {
@@ -57,5 +62,28 @@ class BlogController extends Controller
                 'message' => 'Đánh giá thành công'
             ]);
         }
+    }
+
+    public function blogCommentAjax(Request $request) {
+        $data = [];
+        $data['id_blog'] = (int)$request->input('id_blog');
+        $data['id_user'] = (int)Auth::id();
+        $data['comment'] = $request->input('comment');
+        $data['avatar_user'] = Auth::user()->avatar;
+        $data['name_user'] = Auth::user()->name;
+        $data['level'] = (int)$request->input('level');
+        if(Comment::create($data)) {
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Bình luận thành công',
+                'comment' => $data
+            ]);
+        } else {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Bình luận thất bại',
+                'comment' => $data
+            ]);
+        }       
     }
 }
