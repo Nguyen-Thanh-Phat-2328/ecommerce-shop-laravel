@@ -60,4 +60,9 @@ class MemberController extends Controller
             return redirect() -> back() -> withErrors('Email hoặc mật khẩu không đúng.');
         }
     }
+
+    public function logout() {
+        Auth::Logout();
+        return redirect('frontend/login');
+    }
 }

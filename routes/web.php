@@ -58,6 +58,8 @@ Route::post('/frontend/register', [MemberController::class, 'register']);
 Route::get('/frontend/login', [MemberController::class, 'loginView']);
 Route::post('/frontend/login', [MemberController::class, 'login']);
 
+Route::get('/frontend/logout', [MemberController::class, 'logout']);
+
 //blog
 Route::get('/frontend/blog', [FrontendBlogController::class, 'index']);
 
