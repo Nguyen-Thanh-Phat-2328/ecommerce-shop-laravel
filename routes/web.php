@@ -1,14 +1,15 @@
 <?php
 
 use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Controller;
 use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Frontend\BlogController as FrontendBlogController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\MemberController;
+use App\Http\Controllers\Frontend\ProductController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -32,6 +33,26 @@ Route::get('/admin/country/edit/{id}', [CountryController::class, 'edit']);
 Route::post('/admin/country/edit/{id}', [CountryController::class, 'update']);
 
 Route::get('/admin/country/delete/{id}', [CountryController::class, 'delete']);
+
+//category
+Route::get('/admin/category', [CategoryController::class, 'index']);
+Route::get('/admin/category/add', [CategoryController::class, 'add']);
+Route::post('/admin/category/add', [CategoryController::class, 'insert']);
+
+Route::get('/admin/category/edit/{id}', [CategoryController::class, 'edit']);
+Route::post('/admin/category/edit/{id}', [CategoryController::class, 'update']);
+
+Route::get('/admin/category/delete/{id}', [CategoryController::class, 'delete']);
+
+//brand
+Route::get('/admin/brand', [BrandController::class, 'index']);
+Route::get('/admin/brand/add', [BrandController::class, 'add']);
+Route::post('/admin/brand/add', [BrandController::class, 'insert']);
+
+Route::get('/admin/brand/edit/{id}', [BrandController::class, 'edit']);
+Route::post('/admin/brand/edit/{id}', [BrandController::class, 'update']);
+
+Route::get('/admin/brand/delete/{id}', [BrandController::class, 'delete']);
 
 //blog
 Route::get('/admin/blog', [BlogController::class, 'index']);
@@ -71,5 +92,11 @@ Route::post('/frontend/blog/rate/ajax', [FrontendBlogController::class, 'blogRat
 Route::post('/frontend/blog/comment/ajax', [FrontendBlogController::class, 'blogCommentAjax']);
 
 //account
-Route::get('/frontend/account/update', [MemberController::class, 'profileView']);
-Route::post('/frontend/account/update', [MemberController::class, 'profileUpdate']);
+Route::get('/frontend/account/update', [ProductController::class, 'profileView']);
+Route::post('/frontend/account/update', [ProductController::class, 'profileUpdate']);
+
+//my product
+Route::get('/frontend/account/my-product', [ProductController::class, 'myProduct']);
+//add product
+Route::get('/frontend/account/add-product', [ProductController::class, 'addProduct']);
+Route::post('/frontend/account/add-product', [ProductController::class, 'insertProduct']);
