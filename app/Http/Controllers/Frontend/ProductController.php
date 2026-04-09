@@ -12,6 +12,7 @@ use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Laravel\Facades\Image;
 
 class ProductController extends Controller
 {
@@ -61,6 +62,27 @@ class ProductController extends Controller
     public function insertProduct(AddProductRequest $request) {
         $data = $request->all();
         $data['id_user'] = Auth::id();
+        $dataImage = [];
+        if($request->hasFile('image')) {
+            foreach($request->file('image') as $xx) {
+                $image = Image::read($xx);
+
+                $name = $xx->getClientOriginalName();
+                $name_2 = "hinh50_".$xx->getClientOriginalName();
+                $name_3 = "hinh200_".$xx->getClientOriginalName();
+
+                $path = public_path('upload/product/' . $name);
+                $path2 = public_path('upload/product/' . $name_2);
+                $path3 = public_path('upload/product/' . $name_3);
+
+                $image->save($path);
+                $image->resize(50, 70)->save($path2);
+                $image->resize(200, 300)->save($path3);
+
+                $dataImage[] = $name;
+            }
+            $data['image'] = json_encode($dataImage);
+        }
         if(Product::create($data)) {
             return redirect() -> back() -> with('success', __('Thêm sản phẩm thành công'));
         } else {
