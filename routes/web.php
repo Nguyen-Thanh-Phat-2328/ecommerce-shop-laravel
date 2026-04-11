@@ -100,3 +100,12 @@ Route::get('/frontend/account/my-product', [ProductController::class, 'myProduct
 //add product
 Route::get('/frontend/account/add-product', [ProductController::class, 'addProduct']);
 Route::post('/frontend/account/add-product', [ProductController::class, 'insertProduct']);
+
+//edit product
+Route::get('/frontend/account/edit-product/{id}', [ProductController::class, 'editProduct']);
+Route::post('/frontend/account/edit-product/{id}', [ProductController::class, 'updateProduct']);
+
+Route::get('/frontend/account/delete-product/{id}', [ProductController::class, 'deleteProduct']);
+
+//product detail
+Route::get('/frontend/product/detail/{id}', [ProductController::class, 'productDetail']);

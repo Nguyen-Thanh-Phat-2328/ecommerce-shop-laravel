@@ -14,66 +14,31 @@
 								</tr>
 							</thead>
 							<tbody>
-
-								
-								<tr>
-									<td class="cart_product">
-										<a href=""><img src="images/cart/one.png" alt=""></a>
-									</td>
-									<td class="cart_description">
-										<h4><a href="">Colorblock Scuba</a></h4>
+								@foreach ($products as $item => $value)
+									<tr>
+										<td class="cart_product">
+											<a href=""><img style="width: 100px; height: 120px;" src="{{ asset('upload/product/'.json_decode($value->image, true)[0]) }}" alt=""></a>
+										</td>
+										<td class="cart_description">
+											<h4><a href="">{{ $value->name }}</a></h4>
+											
+										</td>
+										<td class="cart_price">
+											<p>${{ $value->price }}</p>
+										</td>
 										
-									</td>
-									<td class="cart_price">
-										<p>$59</p>
-									</td>
-									
-									<td class="cart_total">
-										<a>edit</a>
-										<a>delete</a>
-									</td>
-									
-								</tr>
-								<tr>
-									<td class="cart_product">
-										<a href=""><img src="images/cart/one.png" alt=""></a>
-									</td>
-									<td class="cart_description">
-										<h4><a href="">Colorblock Scuba</a></h4>
+										<td class="cart_total">
+											<a href="{{ url('frontend/account/edit-product/'.$value->id) }}">edit</a>
+											<a href="{{ url('frontend/account/delete-product/'.$value->id) }}">delete</a>
+										</td>
 										
-									</td>
-									<td class="cart_price">
-										<p>$59</p>
-									</td>
-									
-									<td class="cart_total">
-										<a>edit</a>
-										<a>delete</a>
-									</td>
-									
-								</tr>
-								<tr>
-									<td class="cart_product">
-										<a href=""><img src="images/cart/one.png" alt=""></a>
-									</td>
-									<td class="cart_description">
-										<h4><a href="">Colorblock Scuba</a></h4>
-										
-									</td>
-									<td class="cart_price">
-										<p>$59</p>
-									</td>
-									
-									<td class="cart_total">
-										<a>edit</a>
-										<a>delete</a>
-									</td>
-									
-								</tr>
-
-
-
-							
+									</tr>
+								@endforeach	
+								@if (count($products) == 0)
+									<tr>	
+										<td colspan="4" style="text-align: center; color: #FE980F;">Không có mặt hàng nào</td>		
+									</tr>
+								@endif					
 							</tbody>
 						</table>
                         <a href="{{ url('frontend/account/add-product') }}" class="btn btn-primary">Add Product</a>
