@@ -47,8 +47,8 @@
 								<span>
 									<span>${{ $product->price }}</span>
 									<label>Quantity:</label>
-									<input type="text" value="3" />
-									<button type="button" class="btn btn-fefault cart">
+									<input type="number" value="1" id="quanty"/>
+									<button type="button" class="btn btn-fefault cart add-to-cart" id-product="{{ $product->id }}">
 										<i class="fa fa-shopping-cart"></i>
 										Add to cart
 									</button>
@@ -72,5 +72,34 @@
 				$('#show-image-product a').attr('href', `{{ asset('upload/product/${nameImage}') }}`);
             });
         });
+
+		$(document).on('click', '.add-to-cart', function(){
+			id_product = $(this).attr('id-product');
+			inputQuanty = parseInt($('#quanty').val());
+			if(inputQuanty <= 0) {
+				alert('Nhập lớn hơn 0');
+			} else {
+				// alert('chạy ajax');
+				$.ajax({
+					type: 'POST',
+					url: '{{ url("frontend/add-to-cart/ajax") }}',
+					data: {
+						id_product: id_product,
+						quanty: inputQuanty
+					},
+					success: function(data) {
+						if(data.status == 'success') {
+							alert('Đã thêm vào giỏ hàng');
+							
+							//update trên header
+							const cartCountElement = $('.cart-count');
+							cartCountElement.text(parseInt(cartCountElement.text()) + inputQuanty);
+						} else {
+							alert(data.message);
+						}
+					}
+				})
+			}
+		})
     </script>
 @endsection

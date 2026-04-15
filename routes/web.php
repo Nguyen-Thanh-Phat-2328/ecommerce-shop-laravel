@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Frontend\BlogController as FrontendBlogController;
+use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\MemberController;
 use App\Http\Controllers\Frontend\ProductController;
@@ -109,3 +110,15 @@ Route::get('/frontend/account/delete-product/{id}', [ProductController::class, '
 
 //product detail
 Route::get('/frontend/product/detail/{id}', [ProductController::class, 'productDetail']);
+
+//CART
+//add to cart
+Route::post('/frontend/add-to-cart/ajax', [CartController::class, 'addToCartAjax']);
+Route::post('/frontend/up-date-cart/ajax', [CartController::class, 'cartUpdate']);
+
+Route::get('/frontend/delete-session', function() {
+    session()->forget('cart');
+    return redirect('frontend/home');
+});
+
+Route::get('/frontend/cart', [CartController::class, 'cartIndex']);
