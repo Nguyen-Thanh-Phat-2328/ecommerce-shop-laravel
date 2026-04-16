@@ -63,7 +63,7 @@
 									<li><a href="{{ url('frontend/account/update') }}"><i class="fa fa-user"></i> Account</a></li>
 								@endif
 								<li><a href=""><i class="fa fa-star"></i> Wishlist</a></li>
-								<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
+								<li><a href="{{ url('/frontend/checkout') }}"><i class="fa fa-crosshairs"></i> Checkout</a></li>
 								<li>
 									<a href="{{ url('/frontend/cart') }}"><i class="fa fa-shopping-cart"></i>
 										<span class="cart-count" style="color: red;">

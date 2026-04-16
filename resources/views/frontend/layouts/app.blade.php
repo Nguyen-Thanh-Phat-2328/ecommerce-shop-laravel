@@ -29,7 +29,7 @@
 <body>
 	@include('frontend.layouts.header')
 	
-    @if (!request()->is('frontend/register') && !request()->is('frontend/login') && !request()->is('frontend/blog') && !request()->is('frontend/blog/detail/*') && !request()->is('frontend/account/*') && !request()->is('frontend/cart')) 
+    @if (!request()->is('frontend/register') && !request()->is('frontend/login') && !request()->is('frontend/blog') && !request()->is('frontend/blog/detail/*') && !request()->is('frontend/account/*') && !request()->is('frontend/cart') && !request()->is('frontend/checkout')) 
         @include('frontend.layouts.slide')
     @endif
 
@@ -37,7 +37,7 @@
 		<div class="container">
 			<div class="row">
 				
-                @if (!request()->is('frontend/register') && !request()->is('frontend/login') && !request()->is('frontend/account/*') && !request()->is('frontend/cart'))
+                @if (!request()->is('frontend/register') && !request()->is('frontend/login') && !request()->is('frontend/account/*') && !request()->is('frontend/cart') && !request()->is('frontend/checkout'))
                     @include('frontend.layouts.menu-left')
                 @elseif(request()->is('frontend/account/*'))
                     @include('frontend.layouts.menu-left-account')

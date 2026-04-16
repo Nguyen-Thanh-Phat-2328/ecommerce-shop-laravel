@@ -8,9 +8,11 @@ use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Frontend\BlogController as FrontendBlogController;
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\MemberController;
 use App\Http\Controllers\Frontend\ProductController;
+use App\Http\Controllers\MailController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -122,3 +124,20 @@ Route::get('/frontend/delete-session', function() {
 });
 
 Route::get('/frontend/cart', [CartController::class, 'cartIndex']);
+
+//mail
+Route::get('/test', [MailController::class, 'index']);
+Route::post('/frontend/sendmail/order/ajax', [CheckoutController::class, 'sendMailOrder']);
+
+//checkout
+Route::get('/frontend/checkout', [CheckoutController::class, 'checkout']);
+//đăng ký nhanh trong checkout
+Route::post('/frontend/checkout', [CheckoutController::class, 'register']);
+
+
+
+
+
+Route::get('/hoho', function() {
+    return view('emails/order-notification');
+});
