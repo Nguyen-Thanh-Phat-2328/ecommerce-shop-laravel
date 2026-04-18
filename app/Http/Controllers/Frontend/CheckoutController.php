@@ -21,40 +21,6 @@ class CheckoutController extends Controller
         $countries = Country::all();
         return view('frontend/checkout/checkout', compact('countries'));
     }
-
-    public function sendMailOrder(Request $request) {
-        $email = $request->email;
-        $name = $request->name;
-        $phone = $request->phone;
-        $id_user = $request->id_user;
-        $price = $request->price;
-        $history = [
-            'email' => $email,
-            'name' => $name,
-            'phone' => $phone,
-            'id_user' => $id_user,
-            'price' => $price
-        ];
-
-        if(!History::create($history)) {
-            return response()->json([
-                'Đã xảy ra lỗi'
-            ]);
-        }
-
-        $cart = session()->get('cart', []);
-
-        $data = [
-            'subject' => 'Thông tin đơn hàng',
-            'cart' => $cart
-        ];
-        try{
-            Mail::to($email)->send(new OrderMail($data));
-            return response()->json(['Check mail của bạn']);
-        } catch (Exception $th) {
-            return response()->json(['sorry']);
-        }
-    }
     
     public function register(MemberRegisterRequest $request) {
         $data = $request->all();

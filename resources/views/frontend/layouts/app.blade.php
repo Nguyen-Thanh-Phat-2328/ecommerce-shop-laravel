@@ -29,7 +29,7 @@
 <body>
 	@include('frontend.layouts.header')
 	
-    @if (!request()->is('frontend/register') && !request()->is('frontend/login') && !request()->is('frontend/blog') && !request()->is('frontend/blog/detail/*') && !request()->is('frontend/account/*') && !request()->is('frontend/cart') && !request()->is('frontend/checkout')) 
+    @if (!request()->is('frontend/register') && !request()->is('frontend/login') && !request()->is('frontend/blog') && !request()->is('frontend/blog/detail/*') && !request()->is('frontend/account/*') && !request()->is('frontend/cart') && !request()->is('frontend/checkout') && !request()->is('frontend/shop/*')) 
         @include('frontend.layouts.slide')
     @endif
 
@@ -69,6 +69,31 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             })
+
+            $(document).on('click', '#btn-add-to-cart', function(){
+				var $id_product = $(this).attr('id-product');
+				// alert($id_product);
+				$.ajax({
+					type: 'POST',
+					url: '{{ url("frontend/add-to-cart/ajax") }}',
+					data: {
+						id_product: $id_product
+					},
+					success: function(data) {
+						if(data.status == 'success') {
+							alert('Them thanh cong');
+
+							//update tổng cart header
+							const cartCountElement = document.querySelector('.cart-count');
+							// alert(cartCountElement.textContent);
+							let currentCount = parseInt(cartCountElement.textContent);
+							cartCountElement.textContent = currentCount + 1;
+						} else {
+							alert('Them that bai');
+						}
+					},
+				})
+			})
         })
     </script>
 </body>

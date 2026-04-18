@@ -36,33 +36,3 @@
 
 					</div><!--features_items-->
 @endsection
-@section('script')
-	<script>
-		$(document).ready(function() {
-			$(document).on('click', '#btn-add-to-cart', function(){
-				var $id_product = $(this).attr('id-product');
-				// alert($id_product);
-				$.ajax({
-					type: 'POST',
-					url: '{{ url("frontend/add-to-cart/ajax") }}',
-					data: {
-						id_product: $id_product
-					},
-					success: function(data) {
-						if(data.status == 'success') {
-							alert('Them thanh cong');
-
-							//update tổng cart header
-							const cartCountElement = document.querySelector('.cart-count');
-							// alert(cartCountElement.textContent);
-							let currentCount = parseInt(cartCountElement.textContent);
-							cartCountElement.textContent = currentCount + 1;
-						} else {
-							alert('Them that bai');
-						}
-					},
-				})
-			})
-		})
-	</script>
-@endsection

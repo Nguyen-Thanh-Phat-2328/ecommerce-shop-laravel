@@ -12,6 +12,8 @@ use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\MemberController;
 use App\Http\Controllers\Frontend\ProductController;
+use App\Http\Controllers\Frontend\SearchAdvancedController;
+use App\Http\Controllers\Frontend\SearchController;
 use App\Http\Controllers\MailController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -127,17 +129,14 @@ Route::get('/frontend/cart', [CartController::class, 'cartIndex']);
 
 //mail
 Route::get('/test', [MailController::class, 'index']);
-Route::post('/frontend/sendmail/order/ajax', [CheckoutController::class, 'sendMailOrder']);
+Route::post('/frontend/sendmail/order/ajax', [MailController::class, 'sendMailOrder']);
 
 //checkout
 Route::get('/frontend/checkout', [CheckoutController::class, 'checkout']);
 //đăng ký nhanh trong checkout
 Route::post('/frontend/checkout', [CheckoutController::class, 'register']);
 
-
-
-
-
-Route::get('/hoho', function() {
-    return view('emails/order-notification');
-});
+//search
+Route::get('/frontend/shop/search', [SearchController::class, 'indexSearch']);
+Route::get('/frontend/shop/search-advanced', [SearchAdvancedController::class, 'indexSearchAdvance']);
+Route::post('/frontend/shop/search-advanced', [SearchAdvancedController::class, 'search']);

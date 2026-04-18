@@ -122,12 +122,16 @@
                                 </li> 
 								<li><a href="404.html">404</a></li>
 								<li><a href="contact-us.html">Contact</a></li>
+								<li><a href="{{ url('/frontend/shop/search-advanced') }}">Search advanced</a></li>
 							</ul>
 						</div>
 					</div>
 					<div class="col-sm-3">
 						<div class="search_box pull-right">
-							<input type="text" placeholder="Search"/>
+							<form action="{{ url('/frontend/shop/search') }}">
+								<input type="text" name="key" placeholder="Search"/>
+								<a style="color: white;"><button type="submit" style="margin-top: 0px;" class="btn btn-default get btn-search">Tìm kiếm</button></a>
+							</form>
 						</div>
 					</div>
 				</div>

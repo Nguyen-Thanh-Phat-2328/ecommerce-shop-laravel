@@ -251,6 +251,10 @@ a#scrollUp i {
     color: #fdb45e;
 }
 
+.search_box {
+    display: flex;
+}
+
 .search_box input {
     background: #F0F0E9;
     border: medium none;
@@ -2467,4 +2471,28 @@ textarea {
 }
 .through {
     text-decoration: line-through;
+}
+
+/* form filter trong search-advanced */
+.filter-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding: 15px;
+}
+
+.filter-bar input,
+.filter-bar select {
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+    padding: 8px;
+    flex: 1;
+}
+
+.filter-bar button {
+    background: #fdb45e;
+    border: none;
+    color: #fff;
+    padding: 8px 15px;
+    white-space: nowrap;
 }
