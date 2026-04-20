@@ -98,7 +98,7 @@
             $(document).ready(function() {
 				$('#sl2').on('slideStop', function(e) {
 					var price = e.value;
-					alert(price[0] + " " + price[1]);
+					// alert(price[0] + " " + price[1]);
                     $.ajax({
                         type: 'POST',
                         url: '{{ url("frontend/shop/search-price") }}',
