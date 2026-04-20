@@ -94,6 +94,57 @@
 					},
 				})
 			})
+
+            $(document).ready(function() {
+				$('#sl2').on('slideStop', function(e) {
+					var price = e.value;
+					alert(price[0] + " " + price[1]);
+                    $.ajax({
+                        type: 'POST',
+                        url: '{{ url("frontend/shop/search-price") }}',
+                        data: {
+                            min_price: price[0],
+                            max_price: price[1]
+                        },
+                        success: function(data) {
+                            $('.col-sm-9.padding-right').html('');
+                            data.products.forEach(function(product) {
+                                var productHtml = `
+                                    <div class="col-sm-4">
+                                        <div class="product-image-wrapper">
+                                            <div class="single-products">
+                                                <div class="productinfo text-center">
+                                                    <img src="{{ asset('upload/product/')}}/${JSON.parse(product.image)[0]}" alt="" />
+                                                    <h2>$${product.price}</h2>
+                                                    <p>${product.name}</p>
+                                                    <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                </div>
+                                                <div class="product-overlay">
+                                                    <div class="overlay-content">
+                                                        <h2>$${product.price}</h2>
+                                                        <a id="btn-add-to-cart" id-product="${product.id}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="choose">
+                                                <ul class="nav nav-pills nav-justified">
+                                                    <li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
+                                                        <li><a href="{{ url('frontend/product/detail/${product.id}') }}"><i class="fa fa-plus-square"></i>Product detail</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                `;
+                                $('.col-sm-9.padding-right').append(productHtml);
+                            });
+
+                            if($('.col-sm-9.padding-right').html() == '') {
+                                $('.col-sm-9.padding-right').html('<p style="color: #fdb45e">không có sản phẩm phù hợp</p>');
+                            }
+                        },
+                    })
+				})
+			})
         })
     </script>
 </body>

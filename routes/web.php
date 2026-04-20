@@ -15,6 +15,7 @@ use App\Http\Controllers\Frontend\ProductController;
 use App\Http\Controllers\Frontend\SearchAdvancedController;
 use App\Http\Controllers\Frontend\SearchController;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\SearchPriceController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -140,3 +141,4 @@ Route::post('/frontend/checkout', [CheckoutController::class, 'register']);
 Route::get('/frontend/shop/search', [SearchController::class, 'indexSearch']);
 Route::get('/frontend/shop/search-advanced', [SearchAdvancedController::class, 'indexSearchAdvance']);
 Route::post('/frontend/shop/search-advanced', [SearchAdvancedController::class, 'search']);
+Route::post('/frontend/shop/search-price', [SearchPriceController::class, 'indexSearchPrice']);
