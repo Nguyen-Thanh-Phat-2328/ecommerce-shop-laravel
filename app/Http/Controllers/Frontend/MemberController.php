@@ -11,6 +11,7 @@ use App\Models\Country;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Request;
 
 class MemberController extends Controller
 {
@@ -67,5 +68,27 @@ class MemberController extends Controller
     public function logout() {
         Auth::Logout();
         return redirect('frontend/login');
+    }
+
+    public function forgetPasswordView() {
+        return view('frontend/forget-pass/view-forget-pass');
+    }
+
+    public function viewResetPass(Request $request) {
+        $email = $request['email'];
+        return view('frontend/forget-pass/reset-pass', compact('email'));
+    }
+
+     public function resetPass(Request $request) {
+        $email = $request['email'];
+        $newPassword = $request['password'];
+        $user = User::where('email', $email)->first();
+        if($user) {
+            $user->password = bcrypt($newPassword);
+            $user->save();
+            return redirect('frontend/login')->with('success', 'Mật khẩu đã được đổi thành công.');
+        } else {
+            return redirect()->back()->withErrors('Không tìm thấy người dùng với email này.');
+        }
     }
 }

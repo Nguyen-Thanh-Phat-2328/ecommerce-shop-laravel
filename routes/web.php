@@ -16,6 +16,7 @@ use App\Http\Controllers\Frontend\SearchAdvancedController;
 use App\Http\Controllers\Frontend\SearchController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\SearchPriceController;
+use App\Http\Middleware\Member;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -155,6 +156,15 @@ Route::group([
     Route::get('/frontend/logout', [MemberController::class, 'logout']);
 });
 
+//trang điền mail để nhận link reset password
+Route::get('/frontend/forget-password', [MemberController::class, 'forgetPasswordView']);
+
+//gửi link reset mk cho member
+Route::post('/frontend/forget-password/sendmail/ajax', [MailController::class, 'sendMailForgetPass']);
+
+//trang đổi mk
+Route::get('/frontend/forget-password/reset', [MemberController::class, 'viewResetPass']);
+Route::post('/frontend/forget-password/reset', [MemberController::class, 'resetPass']);
 
 
 

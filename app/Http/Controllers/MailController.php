@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ForgetPassMail;
 use App\Mail\MailNotify;
 use App\Mail\OrderMail;
+use App\Mail\ResetPassMail;
 use App\Models\History;
 use Exception;
 use Illuminate\Http\Request;
@@ -52,6 +54,24 @@ class MailController extends Controller
         ];
         try{
             Mail::to($email)->send(new OrderMail($data));
+            return response()->json(['Check mail của bạn']);
+        } catch (Exception $th) {
+            return response()->json(['sorry']);
+        }
+    }
+
+    public function sendMailForgetPass(Request $request){
+        $email = $request->email;
+        $url = $request->url;
+
+        $data = [
+            'subject' => 'Quên mật khẩu',
+            'email' => $email,
+            'url' => $url  
+        ];
+
+        try{
+            Mail::to($email)->send(new ForgetPassMail($data));
             return response()->json(['Check mail của bạn']);
         } catch (Exception $th) {
             return response()->json(['sorry']);

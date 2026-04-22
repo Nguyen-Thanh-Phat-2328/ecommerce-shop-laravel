@@ -36,7 +36,8 @@
 							<button type="submit" class="btn btn-default">Login</button>
 						</form>
                         <br>
-                        <a href="{{ url('/frontend/register') }}">Đăng ký tài khoản</a>
+                        <a href="{{ url('/frontend/register') }}">Đăng ký tài khoản |</a>
+                        <a href="{{ url('/frontend/forget-password') }}">Quên mật khẩu</a>
 					</div><!--/login form-->
 				</div>
 			</div>
