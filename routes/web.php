@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Frontend\BlogController as FrontendBlogController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
@@ -73,6 +74,12 @@ Route::group([
     Route::post('/admin/blog/edit/{id}', [BlogController::class, 'update']);
 
     Route::get('/admin/blog/delete/{id}', [BlogController::class, 'delete']);
+
+    //quản lý user
+    Route::get('/admin/user', [UserController::class, 'index']);
+    Route::get('/admin/user/edit/{id}', [UserController::class, 'viewEdit']);
+    Route::post('/admin/user/edit/{id}', [UserController::class, 'update']);
+    Route::get('/admin/user/delete/{id}', [UserController::class, 'delete']);
 
 });
 
