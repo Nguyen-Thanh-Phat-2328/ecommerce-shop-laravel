@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\CountryController;
+use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Frontend\BlogController as FrontendBlogController;
@@ -80,6 +81,12 @@ Route::group([
     Route::get('/admin/user/edit/{id}', [UserController::class, 'viewEdit']);
     Route::post('/admin/user/edit/{id}', [UserController::class, 'update']);
     Route::get('/admin/user/delete/{id}', [UserController::class, 'delete']);
+
+    //quan ly product
+    Route::get('/admin/product', [AdminProductController::class, 'index']);
+    Route::get('/admin/product/edit/{id}', [AdminProductController::class, 'viewEdit']);
+    Route::post('/admin/product/edit/{id}', [AdminProductController::class, 'update']);
+    Route::get('/admin/product/delete/{id}', [AdminProductController::class, 'delete']);
 
 });
 
