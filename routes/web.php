@@ -88,6 +88,11 @@ Route::group([
     Route::post('/admin/product/edit/{id}', [AdminProductController::class, 'update']);
     Route::get('/admin/product/delete/{id}', [AdminProductController::class, 'delete']);
 
+    //tim kiem product theo tên member
+    Route::get('/admin/product/search', [AdminProductController::class, 'search']);
+
+    //danh sách order
+    Route::get('/admin/order', [AdminProductController::class, 'orderIndex']);
 });
 
 //

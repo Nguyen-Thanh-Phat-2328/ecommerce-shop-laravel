@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\History;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Intervention\Image\Laravel\Facades\Image;
@@ -84,5 +85,24 @@ class ProductController extends Controller
         } else {
             return redirect() -> back() -> withErrors('Xóa sản phẩm thất bại');
         }
+    }
+
+    public function search(Request $request) {
+        $key = $request->key;
+        if($key == '') {
+            $products = Product::all();
+        } else {
+            $products = Product::join('users', 'products.id_user', '=', 'users.id')
+            ->where('users.name', 'like', '%' . $key . '%')
+            ->select('products.*')
+            ->get();
+        }
+        
+        return view('admin/manage-product/index', compact('products'));
+    }
+
+    public function orderIndex() {
+        $orders = History::all();
+        return view('admin/history-order/index', compact('orders'));
     }
 }

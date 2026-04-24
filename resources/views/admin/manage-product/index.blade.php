@@ -19,6 +19,18 @@
                     </div>
                 </div>
             </div>
+                            <form action="{{ url('/admin/product/search') }}" class="form-horizontal form-material" method="get" enctype="multipart/form-data" style="display: flex; align-items: center; margin-left: 20px;">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <input type="text" placeholder="Nhập tên member" name="key"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <button class="btn btn-success" name="submit" type="submit">Tìm kiếm</button>
+                                    </div>
+                                </div>
+                            </form>
 <div class="container-fluid">
                 <div class="col-12">
                         <div class="card">
